@@ -2,6 +2,15 @@
 
 <p>Here's a list of employees: feel free to play with it.</p>
 <p *ngIf="!employees"><em>Loading...</em></p>
+
+<div class="commands text-right" *ngIf="employees">
+  <button type="button"
+          [routerLink]="['/employee']"
+          class="btn btn-success">
+    Add a new Employee
+  </button>
+</div>
+
 <table class='table table-striped' aria-labelledby="tableLabel" [hidden]="!employees">
   <thead>
     <tr>
@@ -12,7 +21,8 @@
   </thead>
   <tbody>
     <tr *ngFor="let employee of employees">
-      <td>{{ employee.id }}</td>
+      <td><a [routerLink]="['/employee', employee.id]">{{employee.id}}</a>
+      </td>
       <td>{{ employee.name }}</td>
       <td>{{ employee.address }}</td>
     </tr>

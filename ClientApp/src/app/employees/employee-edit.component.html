@@ -1,0 +1,63 @@
+
+<div class="employee-edit">
+  <h1>{{title}}</h1>
+  <p *ngIf="this.id && !employee"><em>Loading...</em></p>
+  <div class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <br />
+      <input type="text" id="name"
+             formControlName="name" required
+             placeholder="Name..."
+             class="form-control" />
+
+      <div *ngIf="form.get('name').invalid &&
+                 (form.get('name').dirty || form.get('name').touched)"
+           class="invalid-feedback">
+        <div *ngIf="form.get('name').errors?.required">
+          Name is required.
+        </div>
+        <div *ngIf="form.get('name').errors?.isDupeField">
+          Name does already exist: please choose another.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="address">Address</label>
+      <br />
+      <input type="text" id="address"
+             formControlName="address" required
+             placeholder="Address"
+             class="form-control" />
+
+      <div *ngIf="form.get('address').invalid &&
+                 (form.get('address').dirty || form.get('address').touched)"
+           class="invalid-feedback">
+        
+      </div>
+    </div>
+
+
+    <div class="form-group commands">
+      <button *ngIf="id" type="submit"
+              (click)="onSubmit()"
+              [disabled]="form.invalid"
+              class="btn btn-success">
+        Save
+      </button>
+      <button *ngIf="!id" type="submit"
+              (click)="onSubmit()"
+              [disabled]="form.invalid"
+              class="btn btn-success">
+        Create
+      </button>
+      <button type="button"
+              [routerLink]="['/employees']"
+              class="btn">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
